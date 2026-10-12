@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import apiClient from '../utils/api'; // Import trạm kiểm soát Axios
 
 export default function Register() {
@@ -59,6 +59,9 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|vn|edu\.vn)$/i;
 
   return (
     <div style={{ maxWidth: '400px', margin: '50px auto', fontFamily: 'sans-serif' }}>
+      <Link to="/" style={{ display: 'inline-block', marginBottom: '20px', color: '#2c3e50', textDecoration: 'none' }}>
+        🏠 Quay về Trang chủ
+      </Link>
       <h2>Đăng ký Học viên mới</h2>
       
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
@@ -105,6 +108,10 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|vn|edu\.vn)$/i;
 
       {/* Khu vực hiển thị thông báo */}
       {message && <p style={{ marginTop: '20px', fontWeight: 'bold', color: message.includes('❌') ? 'red' : 'green' }}>{message}</p>}
+      <p style={{ marginTop: '20px' }}>
+        Bạn đã có tài khoản?{' '}
+        <Link to="/login">Đăng nhập tại đây</Link>
+      </p>
     </div>
   );
 }

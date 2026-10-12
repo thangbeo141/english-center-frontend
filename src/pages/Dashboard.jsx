@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../utils/api';
+import { logout } from '../utils/auth';
 
 export default function Dashboard() {
   const [userData, setUserData] = useState(null);
@@ -34,7 +35,7 @@ export default function Dashboard() {
 
   // Nút Đăng xuất
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    logout();
     navigate('/login');
   };
 
