@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import apiClient from '../utils/api';
+import { studentService } from '../services/studentService';
 
 export default function AdminDashboard() {
   const [students, setStudents] = useState([]);
@@ -17,9 +17,9 @@ export default function AdminDashboard() {
 
   const fetchStudents = async () => {
     try {
-      const response = await apiClient.get('/students');
-      setStudents(response.data || response);
-    } catch (err) {
+      const data = await studentService.getAllStudents();
+      setStudents(data);
+    } catch {
       setError('Không thể tải dữ liệu học viên!');
     } finally {
       setLoading(false);
@@ -39,12 +39,11 @@ export default function AdminDashboard() {
     }
     try {
       // Gửi Api POST để thêm học viên mới 
-      const response = await apiClient.post('/students', {
+      const newStudent = await studentService.createStudent({
         fullName: newName,
         email: newEmail,
         password: newPassword
       });
-      const newStudent = response.data || response;// Lấy dữ liệu học viên mới từ response
       setStudents([...students, newStudent]);
       // Reset form
       setNewName('');
@@ -62,7 +61,7 @@ export default function AdminDashboard() {
     if (!window.confirm('Bạn có chắc chắn muốn xóa học viên này?')) return;
     try {
       // Gọi API xóa (kiểm tra lại route backend nếu cần, ví dụ: /students/:id)
-      await apiClient.delete(`/students/${id}`);
+      await studentService.deleteStudent(id);
       
       // Xóa thành công thì lọc cập nhật lại bảng mà không cần load lại trang
       setStudents(students.filter(student => student.id !== id));
@@ -87,7 +86,7 @@ export default function AdminDashboard() {
     
     try {
       // Gửi API update (Tên biến 'fullName' phải khớp với req.body bên Backend)
-      await apiClient.put(`/students/${id}`, { fullName: editName });
+      await studentService.updateStudentName(id, editName);
       
       // Cập nhật lại UI ngay lập tức
       setStudents(students.map(s => 

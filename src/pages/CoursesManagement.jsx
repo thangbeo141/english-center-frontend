@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import apiClient from '../utils/api';
+import { courseService } from '../services/courseService';
+import { teacherService } from '../services/teacherService';
 
 const CourseManagement = () => {
   const [courses, setCourses] = useState([]);
@@ -19,8 +20,8 @@ const CourseManagement = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await apiClient.get('/courses');
-      setCourses(response.data);
+      const data = await courseService.getAllCourses();
+      setCourses(data);
     } catch (error) {
       console.error('Lỗi khi lấy danh sách khóa học:', error);
     }
@@ -28,8 +29,8 @@ const CourseManagement = () => {
 
   const fetchTeachers = async () => {
     try {
-      const response = await apiClient.get('/students/teachers');
-      setTeachers(response.data);
+      const data = await teacherService.getAllTeachers();
+      setTeachers(data);
     } catch (error) {
       console.error('Lỗi khi lấy danh sách giáo viên:', error);
     }
@@ -43,17 +44,15 @@ const CourseManagement = () => {
     e.preventDefault();
     try {
       // 1. Tạo khóa học mới
-      const courseRes = await apiClient.post('/courses', {
+      const createdCourse = await courseService.createCourse({
         title: formData.title,
         description: formData.description,
         price: formData.price
       });
 
       // 2. Nếu có chọn giáo viên, gọi API phân công
-      if (formData.teacherId && courseRes.data.id) {
-        await apiClient.post(`/courses/${courseRes.data.id}/assign-teacher`, {
-          teacherId: formData.teacherId
-        });
+      if (formData.teacherId && createdCourse.id) {
+        await courseService.assignTeacher(createdCourse.id, formData.teacherId);
       }
 
       alert('Thêm khóa học thành công!');

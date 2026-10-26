@@ -8,6 +8,8 @@ import RequireRole from './components/RequireRole';
 import Layout from './components/Layout'; // <-- Import Layout chung vào
 import './App.css';
 import CoursesManagement from './pages/CoursesManagement';
+import CourseList from './pages/CourseList';
+import MyCourses from './pages/MyCourses';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route element={<RequireRole allowedRoles={['admin', 'teacher', 'student']} />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<h2>Hồ sơ cá nhân chung</h2>} />
+          <Route path="/my-courses" element={<MyCourses />} />
+          <Route path="/courses" element={<CourseList />} />
         </Route>
 
         {/* Khu vực Admin */}
