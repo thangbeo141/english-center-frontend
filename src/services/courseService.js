@@ -19,5 +19,15 @@ export const courseService = {
   async getMyCourses() {
     const response = await apiClient.get('/enrollments/my-courses');
     return response.data;
+  },
+  
+  async getTeachingCourses() {
+    const response = await apiClient.get('/courses/teaching');
+    return response.data;
+  },
+
+  async assignTeacher(courseId, teacherId) {
+    const response = await apiClient.post(`/courses/${courseId}/assign-teacher`, { teacherId });
+    return response.data;
   }
 };

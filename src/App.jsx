@@ -10,6 +10,7 @@ import './App.css';
 import CoursesManagement from './pages/CoursesManagement';
 import CourseList from './pages/CourseList';
 import MyCourses from './pages/MyCourses';
+import TeacherSchedule from './pages/TeacherSchedule';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
 
         {/* Lãnh địa Giáo viên */}
         <Route element={<RequireRole allowedRoles={['teacher']} />}>
-          <Route path="/teacher/schedule" element={<h2>Lịch dạy của tôi</h2>} />
+          <Route path="/teacher/schedule" element={<TeacherSchedule />} />
           <Route path="/teacher/grading" element={<h2>Chấm điểm học viên</h2>} />
         </Route>
 

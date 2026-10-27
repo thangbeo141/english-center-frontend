@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { courseService } from '../services/courseService';
 import { teacherService } from '../services/teacherService';
-
+import CourseCard from '../components/CousesCard';
 const CourseManagement = () => {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
@@ -64,6 +64,17 @@ const CourseManagement = () => {
     }
   };
 
+  const handleAssignTeacher = async (courseId, teacherId) => {
+    try {
+      await courseService.assignTeacher(courseId, teacherId);
+      alert('Phân công giáo viên thành công!');
+      fetchCourses(); // Cập nhật lại bảng
+    } catch (error) {
+      console.error('Lỗi khi phân công giáo viên:', error);
+      alert('Có lỗi xảy ra khi phân công giáo viên!');
+    }
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       <h2>Quản lý Khóa học & Phân công</h2>
@@ -90,7 +101,7 @@ const CourseManagement = () => {
           
           <select 
             name="teacherId" 
-            value={formData.teacherId} onChange={handleInputChange}
+            value={formData.teacherId} onChange={handleAssignTeacher}
             style={{ padding: '8px' }}
           >
             <option value="">-- Chọn Giáo viên phụ trách (Tùy chọn) --</option>
@@ -123,8 +134,19 @@ const CourseManagement = () => {
               <tr key={course.id}>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{course.id}</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>{course.title}</td>
-                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{course.price} VNĐ</td>
+                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{course.price? Number(course.price).toLocaleString('vi-VN') : '0'} VNĐ</td>
                 <td style={{ padding: '10px', border: '1px solid #ddd' }}>
+                  <select 
+                    onChange={(e) => handleAssignTeacher(course.id, e.target.value)}
+                    defaultValue=""
+                  >
+                    <option value="">-- Chọn Giáo viên --</option>
+                    {teachers.map(teacher => (
+                      <option key={teacher.id} value={teacher.id}>
+                        {teacher.full_name} ({teacher.email})
+                      </option>
+                    ))}
+                  </select>
                   <button onClick={() => alert('Tính năng sửa sẽ cập nhật sau')}>Sửa</button>
                   <button onClick={() => alert('Tính năng xóa sẽ cập nhật sau')} style={{ marginLeft: '5px', color: 'red' }}>Xóa</button>
                 </td>

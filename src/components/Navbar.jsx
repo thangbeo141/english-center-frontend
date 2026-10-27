@@ -33,9 +33,9 @@ export default function Navbar() {
       <Link to ="/courses" style={{ color: 'white', textDecoration: 'none', fontWeight: 700 }}>
         Khóa học
       </Link>
+     
 
       <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-        
         
         {/* Nếu là Admin thì hiện thêm các nút quản trị */}
         {role === 'admin' && (
