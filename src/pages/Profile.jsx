@@ -30,7 +30,7 @@ export default function Profile() {
     const loadProfile = async () => {
       try {
         const response = await apiClient.get('/auth/me');
-        const profile = response.user;
+        const profile = response.data.data;
         setUser(profile);
         setForm((current) => ({ ...current, fullName: profile.fullName, email: profile.email }));
       } catch (error) {
@@ -79,16 +79,16 @@ export default function Profile() {
         currentPassword: form.currentPassword || undefined,
         newPassword: form.newPassword || undefined
       });
-      setUser(response.user);
+      setUser(response.data.data);
       setForm((current) => ({
         ...current,
-        fullName: response.user.fullName,
-        email: response.user.email,
+        fullName: response.data.data.fullName,
+        email: response.data.data.email,
         currentPassword: '',
         newPassword: '',
         confirmPassword: ''
       }));
-      setStatus({ type: 'success', message: response.message });
+      setStatus({ type: 'success', message: response.data.message });
       setIsEditing(false); // Đóng form sau khi lưu thành công
     } catch (error) {
       setStatus({ type: 'error', message: error.response?.data?.message || 'Cập nhật hồ sơ thất bại.' });

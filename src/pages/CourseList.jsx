@@ -13,8 +13,8 @@ const CourseList = () => {
 
   const fetchCourses = async () => {
     try {
-      const data = await courseService.getAllCourses();
-      setCourses(data);
+      const result = await courseService.getAllCourses();
+      setCourses(result.data);
     } catch (error) {
       console.error('Lỗi khi lấy danh sách khóa học:', error);
     }

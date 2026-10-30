@@ -39,7 +39,7 @@ const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|vn|edu\.vn)$/i;
 
     try {
       // Gửi nguyên cục formData xuống API /auth/register
-      const response = await apiClient.post('/auth/register', formData);
+      await apiClient.post('/auth/register', formData);
       
       setMessage('Đăng ký thành công! Đang chuyển hướng...');
       

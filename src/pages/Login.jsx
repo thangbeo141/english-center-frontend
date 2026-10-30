@@ -26,8 +26,8 @@ export default function Login() {
     try {
       // 1. Gửi yêu cầu đăng nhập xuống Backend
       const response = await apiClient.post('/auth/login', formData);
-      
-      const token = response.token || response.data?.token;
+      const result = response.data;
+      const token = result.data?.token;
       
       if (!token) {
         throw new Error("Không nhận được Token từ server!");

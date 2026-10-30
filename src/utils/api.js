@@ -20,7 +20,7 @@ apiClient.interceptors.request.use(
 );
 
 apiClient.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       console.error('Lỗi xác thực: Vui lòng đăng nhập lại!');

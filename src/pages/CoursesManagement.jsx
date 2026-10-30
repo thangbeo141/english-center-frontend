@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { courseService } from '../services/courseService';
 import { teacherService } from '../services/teacherService';
-import CourseCard from '../components/CousesCard';
+import ClassStudentsPanel from '../components/ClassStudentsPanel';
 const CourseManagement = () => {
   const [courses, setCourses] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -20,8 +21,8 @@ const CourseManagement = () => {
 
   const fetchCourses = async () => {
     try {
-      const data = await courseService.getAllCourses();
-      setCourses(data);
+      const result = await courseService.getAllCourses();
+      setCourses(result.data);
     } catch (error) {
       console.error('Lỗi khi lấy danh sách khóa học:', error);
     }
@@ -29,8 +30,8 @@ const CourseManagement = () => {
 
   const fetchTeachers = async () => {
     try {
-      const data = await teacherService.getAllTeachers();
-      setTeachers(data);
+      const result = await teacherService.getAllTeachers();
+      setTeachers(result.data);
     } catch (error) {
       console.error('Lỗi khi lấy danh sách giáo viên:', error);
     }
@@ -44,11 +45,12 @@ const CourseManagement = () => {
     e.preventDefault();
     try {
       // 1. Tạo khóa học mới
-      const createdCourse = await courseService.createCourse({
+      const result = await courseService.createCourse({
         title: formData.title,
         description: formData.description,
         price: formData.price
       });
+      const createdCourse = result.data;
 
       // 2. Nếu có chọn giáo viên, gọi API phân công
       if (formData.teacherId && createdCourse.id) {
@@ -101,7 +103,7 @@ const CourseManagement = () => {
           
           <select 
             name="teacherId" 
-            value={formData.teacherId} onChange={handleAssignTeacher}
+            value={formData.teacherId} onChange={handleInputChange}
             style={{ padding: '8px' }}
           >
             <option value="">-- Chọn Giáo viên phụ trách (Tùy chọn) --</option>
@@ -148,6 +150,9 @@ const CourseManagement = () => {
                     ))}
                   </select>
                   <button onClick={() => alert('Tính năng sửa sẽ cập nhật sau')}>Sửa</button>
+                  <button onClick={() => setSelectedCourse(course)} style={{ marginLeft: '5px', color: '#007bff' }}>
+                    Quản lý lớp
+                  </button>
                   <button onClick={() => alert('Tính năng xóa sẽ cập nhật sau')} style={{ marginLeft: '5px', color: 'red' }}>Xóa</button>
                 </td>
               </tr>
@@ -159,6 +164,12 @@ const CourseManagement = () => {
           )}
         </tbody>
       </table>
+      {selectedCourse && (
+        <ClassStudentsPanel
+          course={selectedCourse}
+          onClose={() => setSelectedCourse(null)}
+        />
+      )}
     </div>
   );
 };

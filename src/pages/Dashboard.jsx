@@ -15,9 +15,7 @@ export default function Dashboard() {
         // Ví dụ bạn có API lấy thông tin: router.get('/me', verifyToken, authController.getMe)
         // Tạm thời ở đây mình gọi thử một API courses hoặc API học viên
         const response = await apiClient.get('/auth/me'); 
-        
-        // Nếu API trả về data bình thường, ta cất vào biến
-        setUserData(response.data || response.user);
+        setUserData(response.data.data);
       } catch (error) {
         console.error('Lỗi khi lấy thông tin:', error);
         // Nếu Token hết hạn hoặc không hợp lệ, đuổi về trang Đăng nhập

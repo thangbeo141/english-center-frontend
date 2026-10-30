@@ -1,0 +1,105 @@
+.class-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(15, 27, 45, .55);
+}
+
+.class-panel {
+  width: min(720px, 100%);
+  max-height: min(680px, 90vh);
+  overflow: auto;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(15, 27, 45, .25);
+  color: #263449;
+}
+
+.class-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 28px;
+  border-bottom: 1px solid #e8edf3;
+}
+
+.class-panel-header h2 {
+  margin: 3px 0 0;
+  color: #152238;
+  font-size: 22px;
+}
+
+.class-panel-eyebrow {
+  margin: 0;
+  color: #2979ff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.class-panel-count {
+  margin: 7px 0 0;
+  color: #728096;
+  font-size: 14px;
+}
+
+.class-panel-close {
+  border: 0;
+  background: transparent;
+  color: #728096;
+  cursor: pointer;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.class-panel-state,
+.class-panel-error {
+  margin: 26px 28px;
+  border-radius: 9px;
+  padding: 18px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.class-panel-state {
+  background: #f5f8fc;
+  color: #728096;
+}
+
+.class-panel-error {
+  background: #fff0f0;
+  color: #b42318;
+}
+
+.class-students-table-wrap {
+  overflow-x: auto;
+  padding: 18px 28px 28px;
+}
+
+.class-students-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.class-students-table th,
+.class-students-table td {
+  border-bottom: 1px solid #edf0f5;
+  padding: 13px 10px;
+  text-align: left;
+}
+
+.class-students-table th {
+  color: #728096;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.class-student-name {
+  color: #263449;
+  font-weight: 700;
+}

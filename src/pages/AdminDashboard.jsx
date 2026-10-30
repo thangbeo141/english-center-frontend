@@ -17,8 +17,8 @@ export default function AdminDashboard() {
 
   const fetchStudents = async () => {
     try {
-      const data = await studentService.getAllStudents();
-      setStudents(data);
+      const result = await studentService.getAllStudents();
+      setStudents(result.data);
     } catch {
       setError('Không thể tải dữ liệu học viên!');
     } finally {
@@ -39,11 +39,12 @@ export default function AdminDashboard() {
     }
     try {
       // Gửi Api POST để thêm học viên mới 
-      const newStudent = await studentService.createStudent({
+      const result = await studentService.createStudent({
         fullName: newName,
         email: newEmail,
         password: newPassword
       });
+      const newStudent = result.data;
       setStudents([...students, newStudent]);
       // Reset form
       setNewName('');

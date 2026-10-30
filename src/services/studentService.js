@@ -11,7 +11,10 @@ export const studentService = {
     return response.data;
   },
 
-  deleteStudent: (studentId) => apiClient.delete(`/students/${studentId}`),
+  async deleteStudent(studentId) {
+    const response = await apiClient.delete(`/students/${studentId}`);
+    return response.data;
+  },
 
   async updateStudentName(studentId, fullName) {
     const response = await apiClient.put(`/students/${studentId}`, { fullName });

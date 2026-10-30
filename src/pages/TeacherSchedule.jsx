@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { courseService } from '../services/courseService';
 import CourseCard from '../components/CousesCard';
+import ClassStudentsPanel from '../components/ClassStudentsPanel';
 
 const TeacherSchedule = () => {
   const [courses, setCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const data = await courseService.getTeachingCourses();
-
-        
-        setCourses(data);
+        const result = await courseService.getTeachingCourses();
+        setCourses(result.data);
       } catch (error) {
         console.error('Lỗi khi lấy lịch dạy:', error);
       }
@@ -20,7 +20,8 @@ const TeacherSchedule = () => {
   }, []);
 
   const handleManageClass = (courseId) => {
-    alert(`Chức năng xem học viên và chấm điểm cho lớp ${courseId} sẽ nằm ở đây.`);
+    const course = courses.find((item) => item.id === courseId);
+    setSelectedCourse(course || null);
   };
 
   return (
@@ -41,6 +42,12 @@ const TeacherSchedule = () => {
           <p>Bạn chưa được phân công giảng dạy khóa học nào.</p>
         )}
       </div>
+      {selectedCourse && (
+        <ClassStudentsPanel
+          course={selectedCourse}
+          onClose={() => setSelectedCourse(null)}
+        />
+      )}
     </div>
   );
 };

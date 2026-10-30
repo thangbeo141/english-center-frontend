@@ -26,8 +26,8 @@ export const courseService = {
     return response.data;
   },
 
-  async assignTeacher(courseId, teacherId) {
-    const response = await apiClient.post(`/courses/${courseId}/assign-teacher`, { teacherId });
+  async getStudentsByCourse(courseId) {
+    const response = await apiClient.get(`/courses/${courseId}/students`);
     return response.data;
   }
 };
