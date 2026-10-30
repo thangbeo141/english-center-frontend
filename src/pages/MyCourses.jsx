@@ -16,7 +16,8 @@ const MyCourses = () => {
         } catch (error) {
             console.error('Lỗi khi lấy danh sách khóa học của tôi:', error);
         }
-    };
+    };    
+    <Route path="/teacher/schedule" element={<TeacherSchedule />} />
 
     return (
         <div style={{ padding: '20px' }}>

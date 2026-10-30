@@ -27,11 +27,19 @@ export default function Navbar() {
       <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none', fontWeight: 700 }}>
         English Center
       </Link>
-      <Link to ="/my-courses" style={{ color: 'white', textDecoration: 'none', fontWeight: 700 }}>
-        Khóa học của tôi
-      </Link>
+      
+      {role === 'student' && (
+        <Link to ="/my-courses" style={{ color: 'white', textDecoration: 'none', fontWeight: 700 }}>
+          Khóa học của tôi
+        </Link>
+      )}
+
       <Link to ="/courses" style={{ color: 'white', textDecoration: 'none', fontWeight: 700 }}>
         Khóa học
+      </Link>
+
+      <Link to="/profile" style={{ color: 'white', textDecoration: 'none', fontWeight: 700 }}>
+        Hồ sơ
       </Link>
      
 

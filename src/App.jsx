@@ -11,6 +11,7 @@ import CoursesManagement from './pages/CoursesManagement';
 import CourseList from './pages/CourseList';
 import MyCourses from './pages/MyCourses';
 import TeacherSchedule from './pages/TeacherSchedule';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
         {/* Dành cho mọi user đã đăng nhập */}
         <Route element={<RequireRole allowedRoles={['admin', 'teacher', 'student']} />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<h2>Hồ sơ cá nhân chung</h2>} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/my-courses" element={<MyCourses />} />
           <Route path="/courses" element={<CourseList />} />
         </Route>
