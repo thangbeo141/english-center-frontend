@@ -15,7 +15,7 @@ export default function RequireRole({ allowedRoles }) {
   }
 
   if (!allowedRoles.includes(userRole)) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

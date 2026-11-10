@@ -67,7 +67,7 @@ export default function AdminDashboard() {
       // Xóa thành công thì lọc cập nhật lại bảng mà không cần load lại trang
       setStudents(students.filter(student => student.id !== id));
       alert('Đã xóa học viên thành công!');
-    } catch (error) {
+    } catch {
       alert('Lỗi khi xóa học viên! Kiểm tra lại API Backend.');
     }
   };
@@ -95,7 +95,7 @@ export default function AdminDashboard() {
       ));
       setEditingId(null); // Tắt chế độ sửa
       alert('Cập nhật tên thành công!');
-    } catch (error) {
+    } catch {
       alert('Lỗi khi cập nhật! Kiểm tra lại API Backend.');
     }
   };

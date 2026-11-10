@@ -129,7 +129,7 @@ export default function Profile() {
         <div className="profile-card-heading">
           <div>
             <h2>Thông tin cơ bản</h2>
-            <p>Những thông tin này được sử dụng trong hệ thống English Center.</p>
+            <p>Những thông tin này được sử dụng trong hệ thống NextStep.</p>
           </div>
           {user && <span className="profile-role">{roleLabels[user.role] || user.role}</span>}
         </div>

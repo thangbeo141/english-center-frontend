@@ -1,0 +1,20 @@
+.site-banner {
+  width: 100%;
+  overflow: hidden;
+  background: #e51d2a;
+}
+
+.site-banner img {
+  display: block;
+  width: 100%;
+  max-height: 125px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 600px) {
+  .site-banner img {
+    min-height: 62px;
+    object-fit: cover;
+  }
+}

@@ -51,7 +51,7 @@ export default function Login() {
         } else if (userRole === 'teacher') {
           navigate('/teacher/schedule'); // Giáo viên về phòng Giáo viên
         } else {
-          navigate('/dashboard'); // Học viên về sân chung
+          navigate('/'); // Học viên về trang chủ
         }
       }, 1500);
       

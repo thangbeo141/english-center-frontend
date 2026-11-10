@@ -1,0 +1,96 @@
+.app-navbar {
+  position: relative;
+  z-index: 10;
+  background: #102a43;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(16, 42, 67, .12);
+}
+
+.app-navbar-inner {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  max-width: 1280px;
+  min-height: 76px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.app-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.app-brand-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 11px;
+  background: #f06461;
+  color: #fff;
+  font-size: 19px;
+  box-shadow: 0 5px 12px rgba(240, 100, 97, .3);
+}
+
+.app-brand-accent { color: #f58d89; }
+
+.app-navbar-links,
+.app-navbar-actions,
+.app-admin-links {
+  display: flex;
+  align-items: center;
+}
+
+.app-navbar-links { gap: 22px; }
+.app-navbar-links a {
+  color: #d9e2ec;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.app-navbar-links a:hover { color: #fff; }
+.app-role-link { color: #f7c66b !important; }
+.teacher-link { color: #7dd3c7 !important; }
+.app-admin-links { gap: 15px; }
+.app-navbar-actions { gap: 10px; margin-left: 4px; }
+
+.app-profile-button,
+.app-logout-button {
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 15px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.app-profile-button { background: #f06461; color: #fff; }
+.app-profile-button:hover { background: #df5552; }
+.app-logout-button { background: rgba(255,255,255,.1); color: #fff; }
+.app-logout-button:hover { background: rgba(255,255,255,.18); }
+
+@media (max-width: 900px) {
+  .app-navbar-inner { flex-wrap: wrap; gap: 15px; padding: 14px 22px; }
+  .app-brand { margin-right: auto; }
+  .app-navbar-links { order: 3; width: 100%; overflow-x: auto; padding-bottom: 3px; }
+  .app-navbar-actions { margin-left: 0; }
+}
+
+@media (max-width: 520px) {
+  .app-profile-button { display: none; }
+  .app-navbar-links { gap: 16px; }
+  .app-navbar-links a { white-space: nowrap; }
+}

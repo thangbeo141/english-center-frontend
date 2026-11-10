@@ -13,12 +13,6 @@ const CourseManagement = () => {
     teacherId: ''
   });
 
-  // Tự động lấy dữ liệu khi trang vừa render
-  useEffect(() => {
-    fetchCourses();
-    fetchTeachers();
-  }, []);
-
   const fetchCourses = async () => {
     try {
       const result = await courseService.getAllCourses();
@@ -36,6 +30,12 @@ const CourseManagement = () => {
       console.error('Lỗi khi lấy danh sách giáo viên:', error);
     }
   };
+
+  // Tự động lấy dữ liệu khi trang vừa render
+  useEffect(() => {
+    fetchCourses();
+    fetchTeachers();
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
